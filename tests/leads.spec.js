@@ -22,5 +22,10 @@ test('deve cadastrar um lead na fila de espera', async ({ page }) => {
   await page.getByTestId('modal')
     .getByText('Quero entrar na fila').click()
 
-  await page.waitForTimeout(5000)
+  const message = 'Agradecemos por compartilhar seus dados conosco. Em breve, nossa equipe entrará em contato!'
+  await expect(page.locator('.toast')).toHaveText(message)
+
+  await expect(page.locator('.toast')).toBeHidden({ timeout: 5000})
+
+  // await page.waitForTimeout(5000)
 });
