@@ -2,11 +2,14 @@
 const { test, expect } = require('@playwright/test')
 
 const { LandingPage } = require('../pages/LandingPage')
+const { Toast } = require('../pages/Components')
 
 let landingPage
+let toast
 
 test.beforeEach(async ({ page }) => {
   landingPage = new LandingPage(page)
+  toast = new Toast(page)
 })
 
 test('deve cadastrar um lead na fila de espera', async ({ page }) => {
@@ -15,7 +18,7 @@ test('deve cadastrar um lead na fila de espera', async ({ page }) => {
   await landingPage.submitLeadForm('Fulano de Tall', 'fulanodetall@email.com')
 
   const message = 'Agradecemos por compartilhar seus dados conosco. Em breve, nossa equipe entrará em contato!'
-  await landingPage.toastHaveText(message)
+  await toast.haveText(message)
 });
 
 test('não deve cadastrar com um email incorreto', async ({ page }) => {

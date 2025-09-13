@@ -24,3 +24,27 @@ test('não deve logar com senha incorreta', async ({page})=> {
     const message = 'Oops!Ocorreu um erro ao tentar efetuar o login. Por favor, verifique suas credenciais e tente novamente.'
     await toast.haveText(message)
 })
+
+test('não deve logar quando o email é inválido', async ({page})=> {
+    await loginPage.visit()
+    await loginPage.submit('www.fulanodetall.com.br', 'abc123')    
+    await loginPage.alertHaveText('Email incorreto')
+})
+
+test('não deve logar quando o email não é preenchido', async ({page})=> {
+    await loginPage.visit()
+    await loginPage.submit('', 'abc123')    
+    await loginPage.alertHaveText('Campo obrigatório')
+})
+
+test('não deve logar quando a senha não é preenchida', async ({page})=> {
+    await loginPage.visit()
+    await loginPage.submit('fulanodetall@email.com', '')    
+    await loginPage.alertHaveText('Campo obrigatório')
+})
+
+test('não deve logar quando venhum campo é preenchido', async ({page})=> {
+    await loginPage.visit()
+    await loginPage.submit('', '')    
+    await loginPage.alertHaveText(['Campo obrigatório', 'Campo obrigatório'])
+})
