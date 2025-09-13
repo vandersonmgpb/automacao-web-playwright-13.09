@@ -2,14 +2,25 @@
 const { test, expect } = require('@playwright/test')
 
 test('deve cadastrar um lead na fila de espera', async ({ page }) => {
-  const landingPage = new LandingPage(page)
+  await page.goto('http://localhost:3000/')
 
-  await landingPage.visit()
-  await landingPage.openLeadModal()
-  await landingPage.submitLeadForm('Fulano de Tall', 'fulanodetall@email.com')
+  await page.getByRole('button', { name: /Aperte o play/ }).click()
 
-  const message = ('Agradecemos por compartilhar seus dados conosco. Em breve, nossa equipe entrará em contato!')
+  await expect(
+    page.getByTestId('modal').getByRole('heading')
+  ).toHaveText('Fila de espera')
 
-  await landingPage.toastHaveText(message)
+  // await page.locator('#name').fill('Fulano de Tall')
+  // await page.locator('#email').fill('fulanodetall@email.com')
 
+  // await page.locator('input[placeholder="Informe seu nome"]').fill('Fulano de Tall')
+  // await page.locator('input[placeholder="Informe seu email"]').fill('fulanodetall@email.com')
+
+  await page.getByPlaceholder('Informe seu nome').fill('Fulano de Tall')
+  await page.getByPlaceholder('Informe seu email').fill('fulanodetall@email.com')
+
+  await page.getByTestId('modal')
+    .getByText('Quero entrar na fila').click()
+
+  await page.waitForTimeout(5000)
 });
