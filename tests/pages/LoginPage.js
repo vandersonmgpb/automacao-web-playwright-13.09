@@ -11,7 +11,6 @@ export class LoginPage {
 
         const loginForm = this.page.locator('.login-form')
         await expect(loginForm).toBeVisible()
-
     }
 
     async submit(email, password) {
