@@ -26,7 +26,7 @@ test('deve cadastrar um novo filme', async ({ page }) => {
     await loginPage.submit('admin@zombieplus.com', 'pwd123')
     await moviesPage.isLoggedIn()
 
-    await moviesPage.create('Nome do filme', 'Sinopse do filme', 'Empresa', '2023')
+    await moviesPage.create('Nome do filme', 'Sinopse do filme', 'Amazon Studios', '1981')
     // await moviesPage.create(movie.title, movie.overview, movie.company, movie.release_year)
 
     // await toast.containText('Cadastro realizado com sucesso!')
