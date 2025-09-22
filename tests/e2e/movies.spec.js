@@ -16,7 +16,7 @@ test('deve poder cadastrar um novo filme', async ({ page }) => {
 
 
     // await moviesPage.create('Nome do filme', 'Sinopse do filme', 'Netflix', '1981')
-    // await page.movies.create(movie.title, movie.overview, movie.company, movie.release_year)
-    await page.movies.create(movie)
+    await page.movies.create(movie.title, movie.overview, movie.company, movie.release_year)
+    // await page.movies.create(movie)
     await page.toast.containText('Cadastro realizado com sucesso!')
 })
