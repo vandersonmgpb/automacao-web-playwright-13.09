@@ -4,8 +4,8 @@
     "overview": "Um ex-investigador da ONU tenta impedir uma pandemia de zumbis que ameaça destruir a humanidade.",
     "company": "Paramount Pictures",
     "release_year": 2013,
-    "feature": false,
-    "cover": "images/guerra_mundial_z.png"
+    "feature": true,
+    "cover": "/covers/movies/wwz.png"
   },
   "exterminio": {
     "title": "Extermínio",
@@ -23,13 +23,13 @@
     "feature": false,
     "cover": "images/madrugada_dos_mortos.png"
   },
-  "resident_evil_o_hospede_maldito": {
+  "duplicate": {
     "title": "Resident Evil: O Hóspede Maldito",
     "overview": "Um grupo de comando deve conter um surto viral dentro de um laboratório subterrâneo.",
-    "company": "Screen Gems",
+    "company": "Lionsgate Films",
     "release_year": 2002,
     "feature": false,
-    "cover": "images/resident_evil_o_hospede_maldito.png"
+    "cover": "/covers/movies/resident-evil.jpg"
   },
   "todo_mundo_quase_morto": {
     "title": "Todo Mundo Quase Morto",
