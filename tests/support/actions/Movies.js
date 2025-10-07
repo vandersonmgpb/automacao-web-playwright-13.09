@@ -1,6 +1,7 @@
-const { expect } = require("@playwright/test")
+const { expect } = require('@playwright/test')
 
 export class Movies {
+
     constructor(page) {
         this.page = page
     }
@@ -10,7 +11,7 @@ export class Movies {
     }
 
     async submit() {
-        await this.page.getByRole('button', { name: 'Cadastrar' }).click()
+        await this.page.getByRole('button', {name: 'Cadastrar'}).click()
     }
 
     async create(movie) {
@@ -37,7 +38,7 @@ export class Movies {
         await this.page.locator('input[name=cover]')
             .setInputFiles('tests/support/fixtures' + movie.cover)
 
-        if (movie.feature) {
+        if (movie.featured) {
             await this.page.locator('.featured .react-switch').click()
         }
 
@@ -47,6 +48,7 @@ export class Movies {
     async search(target) {
         await this.page.getByPlaceholder('Busque pelo nome')
             .fill(target)
+
         await this.page.click('.actions button')
     }
 
@@ -55,16 +57,13 @@ export class Movies {
         await expect(rows).toContainText(content)
     }
 
-
     async alertHaveText(target) {
         await expect(this.page.locator('.alert')).toHaveText(target)
     }
 
     async remove(title) {
-        await this.page.getByRole('row', { name: title }).getByRole('button').click()
+        await this.page.getByRole('row', {name: title}).getByRole('button').click()
 
         await this.page.click('.confirm-removal')
     }
 }
-
-// module.exports = { MoviesPage }
