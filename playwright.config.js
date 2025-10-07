@@ -34,7 +34,8 @@ export default defineConfig({
     trace: 'on-first-retry',
     screenshot: 'on',
     video: 'on',
-    baseURL: process.env.BASE_URL
+    baseURL: process.env.BASE_URL,
+    viewport: { width: 1440, height: 900 }
   },
 
   /* Configure projects for major browsers */
