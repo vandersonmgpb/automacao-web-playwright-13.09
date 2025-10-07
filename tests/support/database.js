@@ -22,7 +22,7 @@ export async function executeSQL(sqlScript) {
         const client = await pool.connect()
 
         const result = client.query(sqlScript)
-        console.log(result.rows)
+        // console.log(result.rows)
     } catch (error) {
         console.log('Erro ao executar SQL ' + error)
     }
