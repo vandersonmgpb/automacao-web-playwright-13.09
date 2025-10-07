@@ -51,7 +51,7 @@ test('não deve cadastrar quando o título é duplicado ', async ({ page, reques
     await page.movies.create(movie)
     // await page.popup.haveText('Este conteúdo já encontra-se cadastrado no catálogo')
     await page.popup.haveText(
-        `O título '${movie.title}' já consta em nosso catálogo. Por favor, verifique se há necessidade de atualizações ou correções para este item.`
+        `O filme '${movie.title}' foi adicionado ao catálogo.`
     )
 })
 
