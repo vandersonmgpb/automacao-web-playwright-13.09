@@ -16,12 +16,40 @@ test('deve poder cadastrar um novo filme', async ({ page }) => {
     await page.popup.haveText(`O filme '${movie.title}' foi adicionado ao catálogo.`)
 })
 
-test('não deve cadastrar quando o título é duplicado ', async ({ page, request }) => {
-    const movie = data.duplicate
+test('deve poder remover um filme', async ({ page, request }) => {
+    const movie = data.to_remove
     await request.api.postMovie(movie)
 
     await page.login.do('admin@zombieplus.com', 'pwd123', 'Admin')
+    await page.movies.remove(movie.title)
+    await page.popup.haveText('Filme removido com sucesso.')
+})
+
+test('não deve cadastrar quando o título é duplicado ', async ({ page, request }) => {
+    const movie = data.duplicate
+    // await request.api.setToken()
+    // await request.api.postMovie(movie)
+    await request.api.postMovie(movie)
+    // const api = new Api(request);
+    // await api.setToken();
+
+
+    // const response = await request.post('http://localhost:3333/sessions', {
+    //     data: {
+    //         email: 'admin@zombieplus.com',
+    //         password: 'pwd123'
+    //     }
+    // })
+
+    // expect(response.ok()).toBeTruthy()
+    // const body = JSON.parse(await response.text())
+    // console.log(body.token)
+
+    // await request.api.setToken()
+
+    await page.login.do('admin@zombieplus.com', 'pwd123', 'Admin')
     await page.movies.create(movie)
+    // await page.popup.haveText('Este conteúdo já encontra-se cadastrado no catálogo')
     await page.popup.haveText(
         `O título '${movie.title}' já consta em nosso catálogo. Por favor, verifique se há necessidade de atualizações ou correções para este item.`
     )
@@ -38,4 +66,15 @@ test('não deve cadastrar quando os campos obrigatórios não são preenchidos',
         'Campo obrigatório',
         'Campo obrigatório'
     ])
+})
+
+test('deve realizar busca pelo termo zumbi', async ({ page, request }) => {
+    const movies = data.search
+
+    movies.data.forEach(async (m) => {
+        await request.api.postMovie(m)
+    })
+    await page.login.do('admin@zombieplus.com', 'pwd123', 'Admin')
+    await page.movies.search(movies.input)
+    await page.movies.tableHave(movies.outputs)
 })

@@ -16,11 +16,13 @@ export class Api {
 
         expect(response.ok()).toBeTruthy()
         const body = JSON.parse(await response.text())
+        // this.token = body.token
         this.token = 'Bearer ' + body.token
+
+        // console.log(this.token)
     }
 
     async getCompanyIdByName(companyName) {
-        
         const response = await this.request.get('http://localhost:3333/companies', {
             headers: {
                 Authorization: this.token,
@@ -36,7 +38,6 @@ export class Api {
     }
 
     async postMovie(movie) {
-
         const companyId = await this.getCompanyIdByName(movie.company)
 
         const response = await this.request.post('http://localhost:3333/movies', {
